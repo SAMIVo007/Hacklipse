@@ -15,7 +15,8 @@ import Colors from "../Components/Colors";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import * as Yup from "yup";
 import { Formik } from "formik";
-
+import { auth } from "../firebase"; // Import the exported auth module
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const PasswordSchema = Yup.object().shape({
 	password: Yup.string()
@@ -25,19 +26,21 @@ const PasswordSchema = Yup.object().shape({
 });
 
 export default function LoginScreen({ navigation }) {
-
 	const handleLogin = async (values) => {
-		// try {
-		// 	const response = await loginUser(values);
-		// 	console.log("LoginScreentoken:", response.session.sessionToken);
-
-		// 	if (response.session.sessionToken) {
-		// 		saveSessionToken(response.session.sessionToken);
-		// 		navigation.navigate("Home");
-		// 	}
-		// } catch (error) {
-		// 	console.log("Error occurred during login:", error);
-		// }
+		const { email, password } = values;
+		try {
+			const userCredential = await signInWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+			// User successfully logged in, navigate to home screen or do other actions
+			console.log("User logged in successfully:", userCredential.user.uid);
+			navigation.navigate("Home");
+		} catch (error) {
+			console.log("Error occurred during login:", error.message);
+			// Handle login error (e.g., show error message)
+		}
 	};
 
 	return (
@@ -106,7 +109,10 @@ export default function LoginScreen({ navigation }) {
 								</View>
 
 								<View className=" my-2">
-									<PrimaryButton onPress={handleSubmit}>Login</PrimaryButton>
+									{/* <PrimaryButton onPress={handleSubmit}>Login</PrimaryButton> */}
+									<PrimaryButton onPress={handleSubmit}>
+										Login
+									</PrimaryButton>
 								</View>
 							</View>
 
