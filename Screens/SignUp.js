@@ -17,11 +17,14 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { auth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 
 const PasswordSchema = Yup.object().shape({
 	password: Yup.string()
-		.min(4, "*Passsword Should be min of 4 characters")
+		.min(4, "*Passsword Should be min of 6 characters")
 		.max(16, "*Password should be max of 16 characters")
 		.required("*Password is required"),
 
@@ -51,6 +54,19 @@ export default function SignUpPage({ navigation }) {
 				password
 			);
 			console.log("User signed up successfully:", userCredential.user.uid);
+			try {
+				const userCredential = await signInWithEmailAndPassword(
+					auth,
+					email,
+					password
+				);
+				// User successfully logged in, navigate to home screen or do other actions
+				console.log("User logged in successfully:", userCredential.user.uid);
+				navigation.navigate("Home");
+			} catch (error) {
+				console.log("Error occurred during login:", error.message);
+				// Handle login error (e.g., show error message)
+			}
 		} catch (error) {
 			console.log("Error occurred during signup:", error.message);
 		}

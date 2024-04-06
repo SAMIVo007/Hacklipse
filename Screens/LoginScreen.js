@@ -15,7 +15,7 @@ import Colors from "../Components/Colors";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { auth } from "../firebase"; // Import the exported auth module
+import { auth } from "../firebase"; 
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const PasswordSchema = Yup.object().shape({
