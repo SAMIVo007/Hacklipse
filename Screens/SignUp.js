@@ -17,7 +17,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { auth } from "../firebase";
+import { auth } from "../source/config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
