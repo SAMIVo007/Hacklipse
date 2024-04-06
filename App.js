@@ -1,21 +1,54 @@
-import React, { useState, useEffect } from "react";
-
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./Screens/LoginScreen";
-import LoginSplash from "./Screens/LoginSplash";
-import SignUpPage from "./Screens/SignUp";
-import { NavigationContainer } from "@react-navigation/native";
+import React, { useState, useEffect } from "react"
+import { StyleSheet, Text, View, FlatList } from "react-native"
+import { collection, onSnapshot } from "firebase/firestore"
+import { db } from "./src/config/firebase"
+import CreateUser from "./src/components/CreateUser"
+import DeleteUser from "./src/components/DeleteUser"
+// import CreateProvider from "./src/components/CreateProviders"
+// import DeleteProvider from "./src/components/DeleteProviders"
 
 export default function App() {
-	const Stack = createNativeStackNavigator();
+  const [people, setPeople] = useState([])
+  const [loading, setLoading] = useState(false)
 
-	return (
-		<NavigationContainer>
-			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				<Stack.Screen name="LoginSplash" component={LoginSplash} />
-				<Stack.Screen name="Login" component={LoginScreen} />
-				<Stack.Screen name="SignUp" component={SignUpPage} />
-			</Stack.Navigator>
-		</NavigationContainer>
-	);
+  useEffect(() => {
+    setLoading(true)
+    const usersQuery = collection(db, "users")
+    onSnapshot(usersQuery, (snapshot) => {
+      let usersList = []
+      snapshot.docs.map((doc) => usersList.push({ ...doc.data(), id: doc.id }))
+      setPeople(usersList)
+      setLoading(false)
+    })
+  }, [])
+
+  const renderItem = ({ item }) => (
+    <View style={{ marginTop: 10 }}>
+      <Text>{item.username} {item.age}</Text>
+      <DeleteUser id={item.id} />
+    </View>
+  )
+
+  return (
+    <View style={styles.container}>
+      <Text>Firebase Example</Text>
+      <CreateUser />
+      <FlatList
+        data={people}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  )
+
 }
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 50,
+    },
+  })
