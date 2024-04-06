@@ -17,7 +17,6 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { signUpUser, loginUser } from "../util/Api";
 
 const PasswordSchema = Yup.object().shape({
 	password: Yup.string()
