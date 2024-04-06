@@ -20,7 +20,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { auth } from "../source/config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { values } from "lodash";
+import {CreateUser} from "../source/tables/createuser";
 
 const PasswordSchema = Yup.object().shape({
 	password: Yup.string()
@@ -104,6 +105,8 @@ export default function SignUpPage({ navigation }) {
 				}}
 				validationSchema={PasswordSchema}
 				onSubmit={(values) => {
+					const{name,phone,email,password} = values;
+					CreateUser(name,phone,email,password);
 					// console.log(values);
 					handleSignup(values);
 				}}
