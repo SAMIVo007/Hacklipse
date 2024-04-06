@@ -20,8 +20,8 @@ export default function LoginSplash({ navigation }) {
 		>
 			<View className="flex-1 justify-between items-center p-8">
 				<Image
-					source={require("../assets/Images/Emblem_of_India.png")}
-					className=" w-40 h-2/5 mt-16"
+					source={require("../assets/Images/splash.png")}
+					className=" w-full h-2/4 mt-16"
 				/>
 				<View className=" w-full mb-4">
 					<View className=" rounded-xl mb-4 w-full overflow-hidden">
