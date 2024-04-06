@@ -8,7 +8,6 @@ import {
 	Image,
 } from "react-native";
 import PrimaryButton from "../Components/primaryButton";
-import { loginUser } from "../util/Api";
 import Colors from "../Components/Colors";
 
 export default function LoginSplash({ navigation }) {

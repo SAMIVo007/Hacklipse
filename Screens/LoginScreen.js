@@ -15,8 +15,7 @@ import Colors from "../Components/Colors";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { loginUser } from "../util/Api";
-import { saveSessionToken } from "../util/tokenStore";
+
 
 const PasswordSchema = Yup.object().shape({
 	password: Yup.string()
