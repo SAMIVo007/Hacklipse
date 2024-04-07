@@ -32,11 +32,13 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-native-reanimated-carousel";
 // import { logoutUser, fetchUserDetails, isSessionValid } from "../util/Api";
 import FadedView from "../Components/FadeView";
+import { Fetch } from "../api";
 // import { BlurView } from "expo-blur";
 // import { getSessionToken } from "../util/tokenStore";
 
 export default function Home({ route, navigation }) {
 	const [myuser, setmyuser] = useState("");
+	Fetch("Home care");
 
 	// const handleLogout = async () => {
 	// 	try {
