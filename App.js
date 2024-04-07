@@ -5,6 +5,7 @@ import LoginScreen from "./Screens/LoginScreen";
 import LoginSplash from "./Screens/LoginSplash";
 import SignUpPage from "./Screens/SignUp";
 import Home from "./Screens/Home";
+import Services from "./Screens/Services";
 import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
 				<Stack.Screen name="Login" component={LoginScreen} />
 				<Stack.Screen name="SignUp" component={SignUpPage} />
 				<Stack.Screen name="Home" component={Home} />
+				<Stack.Screen name="Services" component={Services} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

@@ -11,9 +11,6 @@ module.exports = {
 		"./Screens/MenuScreen.{js,jsx,ts,tsx}",
 		"./Components/FadeView.{js,jsx,ts,tsx}",
 		"./Screens/Services.{js,jsx,ts,tsx}",
-		"./Screens/Report.{js,jsx,ts,tsx}",
-		"./Screens/Traffic.{js,jsx,ts,tsx}",
-		"./Screens/MyVehicles.{js,jsx,ts,tsx}",
 	],
 	theme: {
 		extend: {

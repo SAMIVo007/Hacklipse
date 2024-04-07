@@ -32,52 +32,15 @@ import React, { useState, useEffect } from "react";
 import Carousel from "react-native-reanimated-carousel";
 // import { logoutUser, fetchUserDetails, isSessionValid } from "../util/Api";
 import FadedView from "../Components/FadeView";
+import { FetchUser } from "../api";
+import { Picker } from "react-native-ui-lib";
 // import { BlurView } from "expo-blur";
 // import { getSessionToken } from "../util/tokenStore";
 
 export default function Home({ route, navigation }) {
-	const [myuser, setmyuser] = useState("");
+	const [myuser, setMyUser] = useState(null); 
 
-	// const handleLogout = async () => {
-	// 	try {
-	// 		const loggedOut = await logoutUser(sessionToken);
-
-	// 		if (loggedOut) {
-	// 			navigation.navigate("Login");
-	// 		} else {
-	// 			console.log("Not logeed in");
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	const checkSessionValidity = async () => {
-	// 		const sessionToken = await getSessionToken();
-	// 		try {
-	// 			const sessionValid = await isSessionValid(sessionToken);
-	// 			if (!sessionValid) {
-	// 				// alert("Session Timed Out. Please Log In Again.");
-	// 				navigation.navigate("Login");
-	// 			} else {
-	// 				const userDetails = await fetchUserDetails(sessionToken);
-	// 				setmyuser(userDetails.data);
-	// 			}
-	// 		} catch (error) {
-	// 			console.log("Error:", error);
-	// 		}
-	// 	};
-
-	// 	// Check session validity initially
-	// 	checkSessionValidity();
-
-	// 	// // Set interval to check session validity periodically
-	// 	// const intervalId = setInterval(checkSessionValidity, 3000); // Check every 3 seconds
-
-	// 	// // Clean up the interval when the component unmounts
-	// 	// return () => clearInterval(intervalId);
-	// }, []);
+	const [selectedValue, setSelectedValue] = useState("");
 
 	const items = [
 		{
@@ -165,7 +128,7 @@ export default function Home({ route, navigation }) {
 					>
 						<View className=" p-1 ml-4 ">
 							<Text className="text-white text-xl font-bold  pb-1">
-								Welcome, {myuser.name}
+								Welcome, {myuser}
 							</Text>
 						</View>
 
@@ -249,7 +212,7 @@ export default function Home({ route, navigation }) {
 									</View>
 								</View>
 
-								<View className="mx-3 mr-12 items-center justify-center">
+								<TouchableOpacity onPress={()=>{navigation.navigate("Services")}} className="mx-3 mr-12 items-center justify-center">
 									<AntDesign
 										name="pluscircle"
 										size={50}
@@ -261,14 +224,26 @@ export default function Home({ route, navigation }) {
 											justifyContent: "center",
 										}}
 									/>
-								</View>
+								</TouchableOpacity>
 							</ScrollView>
 
 							<View
 								className="border border-gray-300 flex-row bg-white overflow-hidden items-center justify-between mx-4 mt-4 rounded-3xl "
 								style={{ elevation: 10 }}
 							>
-								<TextInput className="flex-1 p-2 px-5" placeholder="Find Services..." />
+								<Picker
+									value={selectedValue}
+									onChange={(value) => setSelectedValue(value)}
+									placeholder="Find Services..."
+									className="flex-1 p-2 px-5"
+								>
+									<Picker.Item label="Caretaker 1" value=" 1" />
+									<Picker.Item label="Caretaker 2" value=" 2" />
+									<Picker.Item label="Caretaker 3" value=" 3" />
+									<Picker.Item label="Caretaker 4" value=" 4" />
+									<Picker.Item label="Caretaker 5" value=" 5" />
+
+								</Picker>
 								<Ionicons
 									name="search"
 									size={24}
